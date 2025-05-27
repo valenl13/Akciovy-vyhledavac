@@ -31,8 +31,9 @@ class Stock:
         }
         interval = interval_map.get(period, "1d")
 
-        hist = self.data.history(period=period)
+        hist = self.data.history(period=period, interval=interval)
         if hist.empty:
+            print(f"[WARN] Žádná data pro {self.ticker} při periodě {period} a intervalu {interval}")
             return None
 
         plt.figure(figsize=(10, 5))
