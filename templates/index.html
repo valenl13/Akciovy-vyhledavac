@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Akciový vyhledávač</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>📈 Akciový vyhledávač</h1>
+
+    <!-- Formulář pro ruční zadání tickeru -->
+    <form method="POST">
+        <input type="text" name="ticker" placeholder="Např. AAPL" required>
+        <button type="submit">Zobrazit</button>
+    </form>
+
+    <!-- Rychlá volba populárních akcií -->
+    <h3>📌 Oblíbené:</h3>
+    <form method="POST">
+        {% for symbol in ["AAPL", "MSFT", "GOOGL", "TSLA", "AMZN", "META"] %}
+            <button name="ticker" value="{{ symbol }}">{{ symbol }}</button>
+        {% endfor %}
+    </form>
+
+    <!-- Chybová hláška -->
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <!-- Výpis informací o akcii -->
+    {% if stock_info %}
+        <table>
+            {% for key, value in stock_info.items() %}
+                <tr>
+                    <th>{{ key }}</th>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <!-- Výběr časového období -->
+        <h2>Graf vývoje ceny</h2>
+        <form method="POST">
+            <input type="hidden" name="ticker" value="{{ stock_info['Ticker'] }}">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                {% for period, label in [
+                    ("1d", "1 den"),
+                    ("5d", "5 dní"),
+                    ("1mo", "1 měsíc"),
+                    ("3mo", "3 měsíce"),
+                    ("6mo", "6 měsíců"),
+                    ("1y", "1 rok")
+                ] %}
+                    <button type="submit" name="period" value="{{ period }}"
+                        class="{{ 'active' if selected_period == period else '' }}">
+                        {{ label }}
+                    </button>
+
+                {% endfor %}
+            </div>
+        </form>
+
+        <!-- Obrázek s grafem -->
+        <img src="{{ chart_url }}" alt="Graf ceny akcie">
+    {% endif %}
+</body>
+</html>

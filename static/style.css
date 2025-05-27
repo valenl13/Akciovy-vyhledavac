@@ -1,0 +1,45 @@
+/* static/style.css */
+body {
+    font-family: sans-serif;
+    text-align: center;
+    padding: 30px;
+    background-color: #f9f9f9;
+}
+
+input, button {
+    padding: 10px;
+    margin: 10px;
+}
+
+form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+button.active {
+    background-color: green !important;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
