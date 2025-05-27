@@ -17,8 +17,8 @@
     <!-- Rychlá volba populárních akcií -->
     <h3>📌 Oblíbené:</h3>
     <form method="POST">
-        {% for symbol in ["AAPL", "MSFT", "GOOGL", "TSLA", "AMZN", "META"] %}
-            <button name="ticker" value="{{ symbol }}">{{ symbol }}</button>
+        {% for ticker in ["AAPL", "MSFT", "GOOGL", "TSLA", "AMZN", "META"] %}
+            <button name="ticker" value="{{ ticker }}">{{ ticker }}</button>
         {% endfor %}
     </form>
 
@@ -41,7 +41,7 @@
         <!-- Výběr časového období -->
         <h2>Graf vývoje ceny</h2>
         <form method="POST">
-            <input type="hidden" name="ticker" value="{{ stock_info['Ticker'] }}">
+            <input type="hidden" name="ticker" value="{{ selected_ticker }}">
             <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
                 {% for period, label in [
                     ("1d", "1 den"),

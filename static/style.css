@@ -25,7 +25,7 @@ form button:hover {
 }
 
 button.active {
-    background-color: green !important;
+    background-color: rgb(21, 2, 196);
 }
 
 table {
